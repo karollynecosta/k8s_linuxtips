@@ -1,0 +1,37 @@
+# Primeiros passos
+```
+kubectl explain pods/services/namespaces ==> manual;
+
+kubectl get all ==> mostra tudo que foi criado;
+kubectl get pods, services, endpoints;
+kubectl get nodes ==> mostra quem está como master e quem esta como WORKER;
+kubectl describe nodes <nome_no> ==> mostra os detalhes do no -- 'annotations' esta quais permissoes assumiu. --allocated resources: saude do no, qual utilizacao da memoria e cpu. --events os logs desde a criacao do no;
+
+```
+
+- Criando um namespaces para uma App
+```
+kubectl create namespace
+```
+
+- Criando um POD
+```
+kubectl run nginx --image=nginx --dry-run=client ==> baixa o template para criacao do POD nginx;
+kubectl run nginx --image=nginx --dry-run=client -o yaml > primeiro_pod.yaml ;
+
+kubectl get pods nginx -o wide ==> mais informacoes sobre o pod
+kubectl get pods nginx -o yaml > descricao_pod.yaml ==> exporta a forma como foi criado, pode ser alterado o namespace aqui;
+kubectl describe pods nginx
+
+kubectl get pods -n <meu_namespace>
+
+kubectl create -f primeiro_pod.yaml
+
+kubectl delete pods nginx
+```
+
+- Expor o POD para accessar
+```
+kubectl expose pod nginx
+```
+

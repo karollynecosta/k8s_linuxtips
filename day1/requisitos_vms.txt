@@ -1,0 +1,50 @@
+#Instalando o cluster K8S
+
+- Requisitos:
+```
+3 VM médias
+docker-ce
+adicionar daemon.json
+criar pasta do docker.service.d
+install kubernetes kubeadm kubelet kubectl
+```
+
+- Iniciando o cluster
+```
+kubeadm config images pull
+kubeadm init
+kubeadm token create --print-join-command  ==> comando para adicionar nodes
+
+seguir os passos que serão informados para iniciar o primeiro PODNetwork
+```
+
+- Testando cluster
+```
+kubectl get pods -n kube-system ==> pega os pods do sistema
+kubectl get nodes
+kubectl completion bash
+
+kubectl get namespaces
+kubectl get pods -all-namespaces
+```
+
+- Criando um namespaces para uma App
+```
+kubectl create namespace
+```
+
+- Criando um POD
+```
+kubectl run nginx --image=nginx --dry-run=client ==> baixa o template para criacao do POD nginx;
+kubectl run nginx --image=nginx --dry-run=client -o yaml > primeiro_pod.yaml ;
+
+kubectl get pods nginx -o wide ==> mais informacoes sobre o pod
+kubectl get pods nginx -o yaml > descricao_pod.yaml ==> exporta a forma como foi criado, pode ser alterado o namespace aqui;
+kubectl describe nginx
+
+kubectl get pods -n <meu_namespace>
+
+kubectl create -f primeiro_pod.yaml
+
+kubectl delete pods nginx
+```
